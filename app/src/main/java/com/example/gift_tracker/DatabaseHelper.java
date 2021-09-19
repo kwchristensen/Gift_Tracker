@@ -159,7 +159,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    // Commit Test
+    // Update
+    public int updateRecipient(Recipient recipient) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put();
+    }
 
 
 
