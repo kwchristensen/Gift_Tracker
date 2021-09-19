@@ -164,38 +164,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put();
+        contentValues.put(KEY_Name, recipient.getName());
+
+        return db.update(TABLE_RECIPIENT, contentValues, KEY_ID + " = ?", new String[] {String.valueOf(recipient.getId())});
     }
 
+    // Delete
+    public void deleteRecipient(Recipient recipient, boolean delete_all_tags) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        db.delete(TABLE_RECIPIENT, KEY_ID + " = ?", new String[] {String.valueOf(recipient.getId())});
+    }
 
 }
