@@ -116,9 +116,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             c.moveToFirst();
         }
 
-        Recipient recipient = new Recipient();
-        recipient.setId(c.getInt(c.getColumnIndex(KEY_ID)));
-        recipient.setName(c.getString(c.getColumnIndex(KEY_Name)));
+        Recipient recipient = new Recipient(
+            c.getInt(c.getColumnIndex(KEY_ID)),
+            c.getString(c.getColumnIndex(KEY_Name))
+        );
 
         c.close();
 
@@ -137,9 +138,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if(c.moveToFirst()) {
             do {
-                Recipient r = new Recipient();
-                r.setId(c.getInt(c.getColumnIndex(KEY_ID)));
-                r.setName(c.getString(c.getColumnIndex(KEY_Name)));
+                Recipient r = new Recipient(
+                    c.getInt(c.getColumnIndex(KEY_ID)),
+                    c.getString(c.getColumnIndex(KEY_Name))
+                );
 
                 recipients.add(r);
             } while (c.moveToNext());

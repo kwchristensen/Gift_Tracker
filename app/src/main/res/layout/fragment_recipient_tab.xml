@@ -6,9 +6,13 @@
     tools:context=".RecipientTab">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+<!--    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Recipient Tab Test" />
+        android:text="Recipient Tab Test" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
