@@ -10,14 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecyclerAdapter.ViewHolder> {
 
-    private List<Recipient> recipientList;
+    private ArrayList<Recipient> recipientList;
     private Context context;
 
-    public RecipientRecyclerAdapter(List<Recipient> recipientList, Context context) {
+    public RecipientRecyclerAdapter(ArrayList<Recipient> recipientList, Context context) {
         this.recipientList = recipientList;
         this.context = context;
     }
