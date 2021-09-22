@@ -40,7 +40,7 @@ public class RecipientTab extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layout;
+    //private RecyclerView.LayoutManager layout;
 
 
     public RecipientTab() {
@@ -78,8 +78,6 @@ public class RecipientTab extends Fragment {
         } else {
             Log.d(DEBUG_LOG, "getArguments == null");
 
-            adapter = new RecipientRecyclerAdapter(recipients, getActivity());
-
             recipients = new ArrayList<>();
 
             Recipient recipient1 = new Recipient(1, "Kyle");
@@ -90,6 +88,8 @@ public class RecipientTab extends Fragment {
 
             Recipient recipient3 = new Recipient(3, "Bar");
             recipients.add(recipient3);
+
+            adapter = new RecipientRecyclerAdapter(recipients, getActivity());
 
             //Log.d(DEBUG_LOG, "Total records:" + adapter.getItemCount());
         }
@@ -235,25 +235,27 @@ public class RecipientTab extends Fragment {
         Recipient recipient3 = new Recipient(3, "Bar");
         recipients.add(recipient3);*/
 
-        /*RecyclerView recyclerView = view.findViewById(R.id.recyclerLayout);
-        RecipientRecyclerAdapter adapter = new RecipientRecyclerAdapter(recipients, view.getContext());
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        //RecipientRecyclerAdapter adapter = new RecipientRecyclerAdapter(recipients, view.getContext());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));*/
 
-        //return view;
+        return view;
 
-        return inflater.inflate(R.layout.fragment_recipient_tab, container, false);
+        //return inflater.inflate(R.layout.fragment_recipient_tab, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerLayout);
+        //recyclerView = (RecyclerView) view.findViewById(R.id.recyclerLayout);
         //layout = new LinearLayoutManager(getActivity());
         //recyclerView.setLayoutManager(layout);
 
-        recyclerView.setAdapter(adapter);
+        //recyclerView.setAdapter(adapter);
 
         //RecyclerView recyclerView = view.findViewById(R.id.recyclerLayout);
         //RecipientRecyclerAdapter adapter = new RecipientRecyclerAdapter(recipients, view.getContext());

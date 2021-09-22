@@ -33,7 +33,7 @@ public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.recipientName.setText((CharSequence) recipientList.get(position));
+        //holder.recipientName.setText((CharSequence) recipientList.get(position));
     }
 
     @Override
@@ -43,12 +43,12 @@ public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView recipientName;
-        RelativeLayout layout;
+        //RelativeLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             recipientName = itemView.findViewById(R.id.textListItem1);
-            layout = itemView.findViewById(R.id.recyclerLayout);
+            //layout = itemView.findViewById(R.id.recyclerLayout);
         }
     }
 }
