@@ -72,10 +72,10 @@ public class GiftTab extends Fragment {
             Gift gift1 = new Gift(1, "Phone", "Pixel 4");
             gifts.add(gift1);
 
-            Gift gift2 = new Gift(1, "Phone", "Pixel 4");
+            Gift gift2 = new Gift(1, "TV", "TLV 65");
             gifts.add(gift2);
 
-            Gift gift3 = new Gift(1, "Phone", "Pixel 4");
+            Gift gift3 = new Gift(1, "Laptop", "Lenovo ideaPad");
             gifts.add(gift3);
 
             adapter = new GiftRecyclerAdapter(gifts, getActivity());

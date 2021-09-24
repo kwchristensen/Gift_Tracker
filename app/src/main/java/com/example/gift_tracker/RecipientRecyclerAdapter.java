@@ -4,14 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecyclerAdapter.ViewHolder> {
 
@@ -24,7 +22,7 @@ public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecy
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            recipientName = itemView.findViewById(R.id.textListItem1);
+            recipientName = itemView.findViewById(R.id.tvRecipientName);
             layout = itemView;
         }
     }
@@ -37,7 +35,7 @@ public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecy
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipient_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }

@@ -1,6 +1,7 @@
 package com.example.gift_tracker;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,33 +23,34 @@ public class GiftRecyclerAdapter extends RecyclerView.Adapter<GiftRecyclerAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            giftName = itemView.findViewById(R.id.textListItem1);
-            giftDescription = itemView.findViewById(R.id.textListItem1);
+            giftName = itemView.findViewById(R.id.tvGiftName);
+            giftDescription = itemView.findViewById(R.id.tvGiftDescription);
             layout = itemView;
         }
     }
 
-    public GiftRecyclerAdapter
-
-
-
-
-
+    public GiftRecyclerAdapter(ArrayList<Gift> list, Context passedContext) {
+        this.giftArrayList = list;
+        this.context = passedContext;
+    }
 
 
     @NonNull
     @Override
     public GiftRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gift_list_item,parent,false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull GiftRecyclerAdapter.ViewHolder holder, int position) {
-
+        holder.giftName.setText(giftArrayList.get(position).getName());
+        holder.giftDescription.setText(giftArrayList.get(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return giftArrayList.size();
     }
 }
