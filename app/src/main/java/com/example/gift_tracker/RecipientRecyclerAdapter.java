@@ -29,6 +29,11 @@ public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecy
         }
     }
 
+    public RecipientRecyclerAdapter(ArrayList<Recipient> recipientList, Context context) {
+        this.recipientList = recipientList;
+        this.context = context;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,11 +46,6 @@ public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecy
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.recipientName.setText(recipientList.get(position).getName());
 
-    }
-
-    public RecipientRecyclerAdapter(ArrayList<Recipient> recipientList, Context context) {
-        this.recipientList = recipientList;
-        this.context = context;
     }
 
     @Override

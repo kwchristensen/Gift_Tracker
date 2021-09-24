@@ -6,6 +6,12 @@ public class Gift {
     String name;
     String description;
 
+    public Gift(int giftId, String giftName, String giftDescription) {
+        this.id = giftId;
+        this.name = giftName;
+        this.description = giftDescription;
+    }
+
     public int getId() {
         return id;
     }

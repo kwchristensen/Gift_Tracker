@@ -6,9 +6,9 @@
     tools:context=".GiftTab">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/giftRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Gift Tab Test" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>
