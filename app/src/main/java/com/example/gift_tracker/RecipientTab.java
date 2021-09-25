@@ -85,6 +85,56 @@ public class RecipientTab extends Fragment {
             Recipient recipient3 = new Recipient(3, "Bar");
             recipients.add(recipient3);
 
+            Recipient recipient4 = new Recipient(4, "Sheldon");
+            recipients.add(recipient4);
+
+            Recipient recipient5 = new Recipient(5, "Leonard");
+            recipients.add(recipient5);
+
+            Recipient recipient6 = new Recipient(6, "Penny");
+            recipients.add(recipient6);
+
+            Recipient recipient7 = new Recipient(1, "Howard");
+            recipients.add(recipient7);
+
+            Recipient recipient8 = new Recipient(2, "Raj");
+            recipients.add(recipient8);
+
+            Recipient recipient9 = new Recipient(3, "Barney");
+            recipients.add(recipient9);
+
+            Recipient recipient10 = new Recipient(4, "Ted");
+            recipients.add(recipient10);
+
+            Recipient recipient11 = new Recipient(5, "Robin");
+            recipients.add(recipient11);
+
+            Recipient recipient12 = new Recipient(6, "Lilly");
+            recipients.add(recipient12);
+
+            Recipient recipient13 = new Recipient(1, "Kyle");
+            recipients.add(recipient13);
+
+            Recipient recipient14 = new Recipient(2, "Foo");
+            recipients.add(recipient14);
+
+            Recipient recipient15 = new Recipient(4, "Ted");
+            recipients.add(recipient15);
+
+            Recipient recipient16 = new Recipient(5, "Robin");
+            recipients.add(recipient16);
+
+            Recipient recipient17 = new Recipient(6, "Lilly");
+            recipients.add(recipient17);
+
+            Recipient recipient18 = new Recipient(1, "Kyle");
+            recipients.add(recipient18);
+
+            Recipient recipient19 = new Recipient(2, "Foo");
+            recipients.add(recipient19);
+
+
+
             adapter = new RecipientRecyclerAdapter(recipients, getActivity());
 
             //Log.d(DEBUG_LOG, "Total records:" + adapter.getItemCount());
