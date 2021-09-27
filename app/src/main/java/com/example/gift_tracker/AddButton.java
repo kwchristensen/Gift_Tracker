@@ -27,8 +27,10 @@ public class AddButton {
 
         if(tabIndex == 0) {
             Log.d(LOG,"Recipient");
+            message = "Recipient Tab";
         } else if (tabIndex == 1) {
             Log.d(LOG, "Gift");
+            message = "Gift Tab";
         }
 
         Snackbar.make(view, message, Snackbar.LENGTH_LONG)
