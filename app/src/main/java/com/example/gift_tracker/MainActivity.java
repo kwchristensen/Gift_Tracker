@@ -1,5 +1,6 @@
 package com.example.gift_tracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,6 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +39,21 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddButton addButton = new AddButton(view, tabs.getSelectedTabPosition());
+                //AddButton addButton = new AddButton(view, tabs.getSelectedTabPosition());
+
+                if(tabs.getSelectedTabPosition() == 0) {
+                    //Log.d(LOG,"Recipient");
+                    //message = "Recipient Tab";
+
+                    Intent intent = new Intent(view.getContext(), AddRecipient.class);
+                    view.getContext().startActivity(intent);
+                } else if (tabs.getSelectedTabPosition() == 1) {
+
+                    Intent intent = new Intent(view.getContext(), AddGift.class);
+                    view.getContext().startActivity(intent);
+                    //Log.d(LOG, "Gift");
+                    //message = "Gift Tab";
+                }
             }
         });
     }
