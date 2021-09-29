@@ -25,10 +25,11 @@ public class AddRecipient extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!txtRecipientName.getText().toString().equals("")) {
-                //if(txtRecipientName.getText().toString() == null) {
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setText("Name Required");
+                if(txtRecipientName.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Nice work, your typing skills amaze me", Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
