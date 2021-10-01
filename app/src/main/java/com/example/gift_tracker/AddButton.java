@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class AddButton {
 
     // This is a github sync test
+    // new branch, new clone github test
 
 /*    private static String LOG = "buttonTag";
     String message;
