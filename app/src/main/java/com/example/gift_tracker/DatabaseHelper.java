@@ -20,6 +20,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Logcat
     private static final String LOG = "dbHelperDebug";
 
+    // Singleton Instance Variable
+    private static DatabaseHelper dbInstance;
+
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
@@ -40,17 +43,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_DESCRIPTION = "description";
 
 
-    // Constructors
-    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    // Constructors (set to private because using Singleton
+    private DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
-    public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, @Nullable DatabaseErrorHandler errorHandler) {
+    private DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, @Nullable DatabaseErrorHandler errorHandler) {
         super(context, name, factory, version, errorHandler);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
-    public DatabaseHelper(@Nullable Context context, @Nullable String name, int version, @NonNull SQLiteDatabase.OpenParams openParams) {
+    private DatabaseHelper(@Nullable Context context, @Nullable String name, int version, @NonNull SQLiteDatabase.OpenParams openParams) {
         super(context, name, version, openParams);
     }
 
@@ -87,11 +90,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // ************************ Singleton Instance ************************ //
+
+    public static synchronized DatabaseHelper getInstance(Context context) {
+        if(dbInstance == null ) {
+            dbInstance = new DatabaseHelper(context.getApplicationContext());
+        }
+        return dbInstance;
+    }
+
+    // Update test
 
     // ************************ Recipient table functions ************************ //
 
     // Create
-    public long createRecipient(Recipient recipient) {
+    public long addRecipient(Recipient recipient) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -117,35 +130,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         Recipient recipient = new Recipient(
-            c.getInt(c.getColumnIndex(KEY_ID)),
-            c.getString(c.getColumnIndex(KEY_Name))
+                c.getInt(c.getColumnIndex(KEY_ID)),
+                c.getString(c.getColumnIndex(KEY_Name))
         );
 
         c.close();
-
-        // TODO: Close db?
 
         return recipient;
     }
 
     // Retrieve all records
-    public List<Recipient> allRecipients() {
-        List<Recipient> recipients = new ArrayList<Recipient>();
+    public List<Recipient> getAllRecipients() {
+        List<Recipient> recipients = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_RECIPIENT;
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = db.rawQuery(query, null);
 
         if(c.moveToFirst()) {
             do {
                 Recipient r = new Recipient(
-                    c.getInt(c.getColumnIndex(KEY_ID)),
-                    c.getString(c.getColumnIndex(KEY_Name))
+                        c.getInt(c.getColumnIndex(KEY_ID)),
+                        c.getString(c.getColumnIndex(KEY_Name))
                 );
 
                 recipients.add(r);
             } while (c.moveToNext());
         }
+
+        db.close();
 
         return recipients;
     }
@@ -157,6 +170,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(query, null);
 
         int count = c.getCount();
+
+        c.close();
 
         return count;
     }
