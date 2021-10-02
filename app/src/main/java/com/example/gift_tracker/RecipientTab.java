@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,63 +76,66 @@ public class RecipientTab extends Fragment {
             Log.d(DEBUG_LOG, "getArguments == null");
 
             recipients = new ArrayList<>();
+            DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
 
-            Recipient recipient1 = new Recipient(1, "Kyle");
+            recipients = db.getAllRecipients();
+
+            /*            Recipient recipient1 = new Recipient("Kyle");
             recipients.add(recipient1);
 
-            Recipient recipient2 = new Recipient(2, "Foo");
+            Recipient recipient2 = new Recipient("Foo");
             recipients.add(recipient2);
 
-            Recipient recipient3 = new Recipient(3, "Bar");
+            Recipient recipient3 = new Recipient("Bar");
             recipients.add(recipient3);
 
-            Recipient recipient4 = new Recipient(4, "Sheldon");
+            Recipient recipient4 = new Recipient("Sheldon");
             recipients.add(recipient4);
 
-            Recipient recipient5 = new Recipient(5, "Leonard");
+            Recipient recipient5 = new Recipient("Leonard");
             recipients.add(recipient5);
 
-            Recipient recipient6 = new Recipient(6, "Penny");
+            Recipient recipient6 = new Recipient("Penny");
             recipients.add(recipient6);
 
-            Recipient recipient7 = new Recipient(1, "Howard");
+            Recipient recipient7 = new Recipient("Howard");
             recipients.add(recipient7);
 
-            Recipient recipient8 = new Recipient(2, "Raj");
+            Recipient recipient8 = new Recipient( "Raj");
             recipients.add(recipient8);
 
-            Recipient recipient9 = new Recipient(3, "Barney");
+            Recipient recipient9 = new Recipient("Barney");
             recipients.add(recipient9);
 
-            Recipient recipient10 = new Recipient(4, "Ted");
+            Recipient recipient10 = new Recipient("Ted");
             recipients.add(recipient10);
 
-            Recipient recipient11 = new Recipient(5, "Robin");
+            Recipient recipient11 = new Recipient("Robin");
             recipients.add(recipient11);
 
-            Recipient recipient12 = new Recipient(6, "Lilly");
+            Recipient recipient12 = new Recipient("Lilly");
             recipients.add(recipient12);
 
-            Recipient recipient13 = new Recipient(1, "Kyle");
+            Recipient recipient13 = new Recipient("Kyle");
             recipients.add(recipient13);
 
-            Recipient recipient14 = new Recipient(2, "Foo");
+            Recipient recipient14 = new Recipient("Foo");
             recipients.add(recipient14);
 
-            Recipient recipient15 = new Recipient(4, "Ted");
+            Recipient recipient15 = new Recipient("Ted");
             recipients.add(recipient15);
 
-            Recipient recipient16 = new Recipient(5, "Robin");
+            Recipient recipient16 = new Recipient("Robin");
             recipients.add(recipient16);
 
-            Recipient recipient17 = new Recipient(6, "Lilly");
+            Recipient recipient17 = new Recipient( "Lilly");
             recipients.add(recipient17);
 
-            Recipient recipient18 = new Recipient(1, "Kyle");
+            Recipient recipient18 = new Recipient("Kyle");
             recipients.add(recipient18);
 
-            Recipient recipient19 = new Recipient(2, "Foo");
-            recipients.add(recipient19);
+            Recipient recipient19 = new Recipient("Foo");
+            recipients.add(recipient19);*/
 
 
 

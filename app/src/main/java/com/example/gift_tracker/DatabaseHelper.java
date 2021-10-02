@@ -130,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         Recipient recipient = new Recipient(
-                c.getInt(c.getColumnIndex(KEY_ID)),
+                //c.getInt(c.getColumnIndex(KEY_ID)),
                 c.getString(c.getColumnIndex(KEY_Name))
         );
 
@@ -140,8 +140,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Retrieve all records
-    public List<Recipient> getAllRecipients() {
-        List<Recipient> recipients = new ArrayList<>();
+    public ArrayList<Recipient> getAllRecipients() {
+        ArrayList<Recipient> recipients = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_RECIPIENT;
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -150,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(c.moveToFirst()) {
             do {
                 Recipient r = new Recipient(
-                        c.getInt(c.getColumnIndex(KEY_ID)),
+                        //c.getInt(c.getColumnIndex(KEY_ID)),
                         c.getString(c.getColumnIndex(KEY_Name))
                 );
 

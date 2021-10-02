@@ -5,8 +5,8 @@ public class Recipient {
     private int id;
     private String name;
 
-    public Recipient(int id, String name) {
-        this.id = id;
+    public Recipient(/*int id, */String name) {
+        //this.id = id;
         this.name = name;
     }
 
