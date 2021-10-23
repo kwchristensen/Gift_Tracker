@@ -42,9 +42,14 @@ public class AddRecipient extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Total Records: " + db.getRecipientCount(), Toast.LENGTH_LONG);
                     toast.show();
 
-                    Intent intent = new Intent(v.getContext(), MainActivity.class);
-                    getApplicationContext().startActivity(intent);
-                }
+                    /*Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    getApplicationContext().startActivity(intent);*/
+
+                    finish();
+
+
+
+               }
             }
         });
     }
