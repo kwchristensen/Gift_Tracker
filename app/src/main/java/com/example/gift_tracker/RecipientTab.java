@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,65 +75,10 @@ public class RecipientTab extends Fragment {
         } else {
             Log.d(DEBUG_LOG, "getArguments == null");
 
-           assignRecipientList();
+            // Clean db for testing
+            deleteAllRecipientsFromDb();
 
-            /*            Recipient recipient1 = new Recipient("Kyle");
-            recipients.add(recipient1);
-
-            Recipient recipient2 = new Recipient("Foo");
-            recipients.add(recipient2);
-
-            Recipient recipient3 = new Recipient("Bar");
-            recipients.add(recipient3);
-
-            Recipient recipient4 = new Recipient("Sheldon");
-            recipients.add(recipient4);
-
-            Recipient recipient5 = new Recipient("Leonard");
-            recipients.add(recipient5);
-
-            Recipient recipient6 = new Recipient("Penny");
-            recipients.add(recipient6);
-
-            Recipient recipient7 = new Recipient("Howard");
-            recipients.add(recipient7);
-
-            Recipient recipient8 = new Recipient( "Raj");
-            recipients.add(recipient8);
-
-            Recipient recipient9 = new Recipient("Barney");
-            recipients.add(recipient9);
-
-            Recipient recipient10 = new Recipient("Ted");
-            recipients.add(recipient10);
-
-            Recipient recipient11 = new Recipient("Robin");
-            recipients.add(recipient11);
-
-            Recipient recipient12 = new Recipient("Lilly");
-            recipients.add(recipient12);
-
-            Recipient recipient13 = new Recipient("Kyle");
-            recipients.add(recipient13);
-
-            Recipient recipient14 = new Recipient("Foo");
-            recipients.add(recipient14);
-
-            Recipient recipient15 = new Recipient("Ted");
-            recipients.add(recipient15);
-
-            Recipient recipient16 = new Recipient("Robin");
-            recipients.add(recipient16);
-
-            Recipient recipient17 = new Recipient( "Lilly");
-            recipients.add(recipient17);
-
-            Recipient recipient18 = new Recipient("Kyle");
-            recipients.add(recipient18);
-
-            Recipient recipient19 = new Recipient("Foo");
-            recipients.add(recipient19);*/
-
+            createRecipientList();
             adapter = new RecipientRecyclerAdapter(recipients, getActivity());
 
             //Log.d(DEBUG_LOG, "Total records:" + adapter.getItemCount());
@@ -160,13 +104,23 @@ public class RecipientTab extends Fragment {
 
     public void updateRecipientList(){
 
-        assignRecipientList();
-        adapter.notifyItemInserted(recipients.size() - 1);
+        // ugly but it works
+        recyclerView = this.getActivity().findViewById(R.id.recipientRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        recyclerView.setAdapter(adapter);
 
-        Log.d("test", "RecipientTab Refresh");
+        DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
+
+        Log.d("test", "RecipientTab Refresh, adapter size:" + adapter.getItemCount() + ", db count:" + db.getRecipientCount());
+
+        recipients.add(db.getRecipient(db.getRecipientCount()));
+        adapter.notifyItemInserted(db.getRecipientCount());
+
+        Log.d("test", "RecipientTab Refresh, adapter size:" + adapter.getItemCount() + ", db count:" + db.getRecipientCount());
     }
 
-    private void assignRecipientList() {
+    private void createRecipientList() {
 
         recipients = new ArrayList<>();
         DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
@@ -174,9 +128,11 @@ public class RecipientTab extends Fragment {
         recipients = db.getAllRecipients();
     }
 
-    public String fragmentTest(){
-        return "Made it";
+    private void deleteAllRecipientsFromDb() {
+        DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
+        db.deleteAllRecipientRecords();
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

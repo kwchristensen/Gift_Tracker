@@ -193,4 +193,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_RECIPIENT, KEY_ID + " = ?", new String[] {String.valueOf(recipient.getId())});
     }
 
+    public void deleteAllRecipientRecords() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + TABLE_RECIPIENT);
+    }
+
+
 }

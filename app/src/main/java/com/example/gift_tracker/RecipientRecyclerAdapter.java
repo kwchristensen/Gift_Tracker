@@ -50,4 +50,8 @@ public class RecipientRecyclerAdapter extends RecyclerView.Adapter<RecipientRecy
     public int getItemCount() {
         return recipientList.size();
     }
+
+    /*public void addNewRecipient(ArrayList<Recipient> arrayList) {
+
+    }*/
 }

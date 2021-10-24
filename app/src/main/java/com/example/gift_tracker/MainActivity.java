@@ -80,15 +80,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addNewRecipient() {
-        Intent intent = new Intent(this, AddRecipient.class);
+       Intent intent = new Intent(MainActivity.this, AddRecipient.class);
+        /* startActivity(intent);*/
+
         addNewRecipientToDb.launch(intent);
     }
 
     public void updateRecyclerView() {
-        RecipientTab recipientTab = (RecipientTab) getSupportFragmentManager().findFragmentById(R.id.view_pager);
-        if(recipientTab != null && recipientTab.isAdded()) {
+        //RecipientTab recipientTab = (RecipientTab) getSupportFragmentManager().findFragmentById(R.id.view_pager);
+
+        ViewPager viewPager = binding.viewPager;
+        Fragment selectedTab = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.view_pager + ":" + viewPager.getCurrentItem());
+
+        ((RecipientTab)selectedTab).updateRecipientList();
+
+        /*if(recipientTab != null && recipientTab.isAdded()) {
             recipientTab.updateRecipientList();
             //recipientTab.updateRecipientList(getSupportFragmentManager().getPrimaryNavigationFragment().requireView());
-        }
+        }*/
     }
 }
