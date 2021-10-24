@@ -36,8 +36,9 @@ public class RecipientTab extends Fragment {
     ArrayList<Recipient> recipients;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    //private RecyclerView.LayoutManager layout;
+    private RecipientRecyclerAdapter adapter;
+    //private RecyclerView.Adapter adapter;
+
 
 
     public RecipientTab() {
@@ -75,10 +76,7 @@ public class RecipientTab extends Fragment {
         } else {
             Log.d(DEBUG_LOG, "getArguments == null");
 
-            recipients = new ArrayList<>();
-            DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
-
-            recipients = db.getAllRecipients();
+           assignRecipientList();
 
             /*            Recipient recipient1 = new Recipient("Kyle");
             recipients.add(recipient1);
@@ -137,8 +135,6 @@ public class RecipientTab extends Fragment {
             Recipient recipient19 = new Recipient("Foo");
             recipients.add(recipient19);*/
 
-
-
             adapter = new RecipientRecyclerAdapter(recipients, getActivity());
 
             //Log.d(DEBUG_LOG, "Total records:" + adapter.getItemCount());
@@ -148,153 +144,38 @@ public class RecipientTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recipient_tab, container, false);
 
-        /*List<Recipient> recipients = new List<Recipient>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(@Nullable Object o) {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public Iterator<Recipient> iterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @NonNull
-            @Override
-            public <T> T[] toArray(@NonNull T[] ts) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Recipient recipient) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(@Nullable Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(@NonNull Collection<? extends Recipient> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int i, @NonNull Collection<? extends Recipient> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Recipient get(int i) {
-                return null;
-            }
-
-            @Override
-            public Recipient set(int i, Recipient recipient) {
-                return null;
-            }
-
-            @Override
-            public void add(int i, Recipient recipient) {
-
-            }
-
-            @Override
-            public Recipient remove(int i) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Recipient> listIterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Recipient> listIterator(int i) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public List<Recipient> subList(int i, int i1) {
-                return null;
-            }
-        };*/
-        //ArrayList<Recipient> recipients = new ArrayList<>();
-        /*recipients = new ArrayList<>();
-
-        Recipient recipient1 = new Recipient(1, "Kyle");
-        recipients.add(recipient1);
-
-        Recipient recipient2 = new Recipient(2, "Foo");
-        recipients.add(recipient2);
-
-        Recipient recipient3 = new Recipient(3, "Bar");
-        recipients.add(recipient3);*/
-
-        RecyclerView recyclerView = view.findViewById(R.id.recipientRecyclerView);
+        recyclerView = view.findViewById(R.id.recipientRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-        //RecipientRecyclerAdapter adapter = new RecipientRecyclerAdapter(recipients, view.getContext());
         recyclerView.setAdapter(adapter);
 
         return view;
 
         //return inflater.inflate(R.layout.fragment_recipient_tab, container, false);
+    }
+
+    public void updateRecipientList(){
+
+        assignRecipientList();
+        adapter.notifyItemInserted(recipients.size() - 1);
+
+        Log.d("test", "RecipientTab Refresh");
+    }
+
+    private void assignRecipientList() {
+
+        recipients = new ArrayList<>();
+        DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
+
+        recipients = db.getAllRecipients();
+    }
+
+    public String fragmentTest(){
+        return "Made it";
     }
 
     @Override
