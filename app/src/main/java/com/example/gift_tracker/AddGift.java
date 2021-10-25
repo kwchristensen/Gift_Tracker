@@ -30,8 +30,11 @@ public class AddGift extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_LONG);
                     toast.show();
                 } else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Nice work, your typing skills amaze me", Toast.LENGTH_LONG);
-                    toast.show();
+                    /*Toast toast = Toast.makeText(getApplicationContext(), "Nice work, your typing skills amaze me", Toast.LENGTH_LONG);
+                    toast.show();*/
+
+                    Gift newGift = new Gift(txtGiftName.getText().toString(), txtGiftDescription.getText().toString());
+                    
                 }
             }
         });

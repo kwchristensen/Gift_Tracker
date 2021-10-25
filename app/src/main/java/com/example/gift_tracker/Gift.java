@@ -6,8 +6,7 @@ public class Gift {
     String name;
     String description;
 
-    public Gift(int giftId, String giftName, String giftDescription) {
-        this.id = giftId;
+    public Gift(String giftName, String giftDescription) {
         this.name = giftName;
         this.description = giftDescription;
     }
