@@ -26,6 +26,8 @@ public class AddGift extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DatabaseHelper db = DatabaseHelper.getInstance(getApplicationContext());
+
                 if(txtGiftName.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_LONG);
                     toast.show();
@@ -34,6 +36,8 @@ public class AddGift extends AppCompatActivity {
                     toast.show();*/
 
                     Gift newGift = new Gift(txtGiftName.getText().toString(), txtGiftDescription.getText().toString());
+
+
                     
                 }
             }

@@ -117,6 +117,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return recipient_id;
     }
 
+    public long addGift(Gift gift) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_Name, gift.getName());
+        values.put(KEY_DESCRIPTION, gift.description);
+
+        db.close();
+
+        long gift_id = db.insert(TABLE_GIFT, null, values);
+
+        return  gift_id;
+    }
+
     // Read
     public Recipient getRecipient(long recipient_id) {
         SQLiteDatabase db = this.getReadableDatabase();
