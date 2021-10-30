@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.activity.result.ActivityResult;
@@ -17,14 +16,10 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.example.gift_tracker.ui.main.SectionsPagerAdapter;
 import com.example.gift_tracker.databinding.ActivityMainBinding;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +38,18 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("test", result.toString());
                     }
 
-                    updateRecyclerView();
+                    updateRecipientRecyclerView();
+                }
+
+            }
+    );
+
+    ActivityResultLauncher<Intent> addNewGiftToDb = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    updateGiftRecyclerView();
                 }
 
             }
@@ -71,32 +77,33 @@ public class MainActivity extends AppCompatActivity {
                 if(tabs.getSelectedTabPosition() == 0) {
                     addNewRecipient();
                 } else if (tabs.getSelectedTabPosition() == 1) {
-
-                    Intent intent = new Intent(view.getContext(), AddGift.class);
-                    view.getContext().startActivity(intent);
+                    addNewGift();
                 }
             }
         });
     }
 
     private void addNewRecipient() {
-       Intent intent = new Intent(MainActivity.this, AddRecipient.class);
-        /* startActivity(intent);*/
-
+        Intent intent = new Intent(MainActivity.this, AddRecipient.class);
         addNewRecipientToDb.launch(intent);
     }
 
-    public void updateRecyclerView() {
-        //RecipientTab recipientTab = (RecipientTab) getSupportFragmentManager().findFragmentById(R.id.view_pager);
+    public void addNewGift(){
+        Intent intent = new Intent(MainActivity.this, AddGift.class);
+        addNewGiftToDb.launch(intent);
+    }
 
+    public void updateRecipientRecyclerView() {
         ViewPager viewPager = binding.viewPager;
         Fragment selectedTab = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.view_pager + ":" + viewPager.getCurrentItem());
 
         ((RecipientTab)selectedTab).updateRecipientList();
+    }
 
-        /*if(recipientTab != null && recipientTab.isAdded()) {
-            recipientTab.updateRecipientList();
-            //recipientTab.updateRecipientList(getSupportFragmentManager().getPrimaryNavigationFragment().requireView());
-        }*/
+    public void updateGiftRecyclerView() {
+        ViewPager viewPager = binding.viewPager;
+        Fragment selectedTab = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.view_pager + ":" + viewPager.getCurrentItem());
+
+        ((GiftTab)selectedTab).updateGiftList();
     }
 }

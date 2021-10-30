@@ -76,7 +76,7 @@ public class RecipientTab extends Fragment {
             Log.d(DEBUG_LOG, "getArguments == null");
 
             // Clean db for testing
-            deleteAllRecipientsFromDb();
+            //deleteAllRecipientsFromDb();
 
             createRecipientList();
             adapter = new RecipientRecyclerAdapter(recipients, getActivity());

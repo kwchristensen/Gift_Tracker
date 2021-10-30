@@ -124,9 +124,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_Name, gift.getName());
         values.put(KEY_DESCRIPTION, gift.description);
 
-        db.close();
-
         long gift_id = db.insert(TABLE_GIFT, null, values);
+
+        db.close();
 
         return  gift_id;
     }
@@ -153,6 +153,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return recipient;
     }
 
+    public Gift getGift(long gift_id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_GIFT + " WHERE " + KEY_ID + "=" + gift_id;
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c != null) {
+            c.moveToFirst();
+        }
+
+        Gift gift = new Gift(
+                c.getString(c.getColumnIndex(KEY_Name)),
+                c.getString(c.getColumnIndex(KEY_DESCRIPTION))
+        );
+
+        c.close();
+
+        return gift;
+    }
+
     // Retrieve all records
     public ArrayList<Recipient> getAllRecipients() {
         ArrayList<Recipient> recipients = new ArrayList<>();
@@ -177,9 +198,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return recipients;
     }
 
+    public ArrayList<Gift> getAllGifts() {
+        ArrayList<Gift> gifts = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_GIFT;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()) {
+            do {
+                Gift gift = new Gift(
+                        c.getString(c.getColumnIndex(KEY_Name)),
+                        c.getString(c.getColumnIndex(KEY_DESCRIPTION))
+                );
+                gifts.add(gift);
+            } while (c.moveToNext());
+        }
+
+        db.close();
+
+        return gifts;
+    }
+
     // Record Count
     public int getRecipientCount() {
         String query = "SELECT * FROM " + TABLE_RECIPIENT;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(query, null);
+
+        int count = c.getCount();
+
+        c.close();
+
+        return count;
+    }
+
+    public int getGiftCount() {
+        String query = "SELECT * FROM " + TABLE_GIFT;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
 
@@ -200,6 +255,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.update(TABLE_RECIPIENT, contentValues, KEY_ID + " = ?", new String[] {String.valueOf(recipient.getId())});
     }
 
+    public int updateGift(Gift gift) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_Name, gift.getName());
+        contentValues.put(KEY_DESCRIPTION, gift.getDescription());
+
+        return db.update(TABLE_GIFT, contentValues, KEY_ID + " = ?", new String[] {String.valueOf(gift.getId())});
+    }
+
     // Delete
     public void deleteRecipient(Recipient recipient, boolean delete_all_tags) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -207,9 +272,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_RECIPIENT, KEY_ID + " = ?", new String[] {String.valueOf(recipient.getId())});
     }
 
+    public void deleteGift(Gift gift, boolean delete_all_tags) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_GIFT, KEY_ID + " = ? ", new String[] {String.valueOf(gift.getId())});
+    }
+
     public void deleteAllRecipientRecords() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from " + TABLE_RECIPIENT);
+    }
+
+    public void deleteAllGiftRecords() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + TABLE_GIFT);
     }
 
 

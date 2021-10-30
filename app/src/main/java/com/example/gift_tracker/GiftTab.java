@@ -96,6 +96,7 @@ public class GiftTab extends Fragment {
             Gift gift9 = new Gift(1, "Laptop", "Lenovo ideaPad");
             gifts.add(gift9);*/
 
+            createGiftList();
             adapter = new GiftRecyclerAdapter(gifts, getActivity());
         }
 
@@ -107,12 +108,35 @@ public class GiftTab extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_gift_tab, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.giftRecyclerView);
+        recyclerView = view.findViewById(R.id.giftRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
         recyclerView.setAdapter(adapter);
 
         return view;
+    }
+
+    public void updateGiftList() {
+        recyclerView = this.getActivity().findViewById(R.id.giftRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        recyclerView.setAdapter(adapter);
+
+        DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
+
+        gifts.add(db.getGift(db.getGiftCount()));
+        adapter.notifyItemInserted(db.getGiftCount());
+    }
+
+    private void createGiftList() {
+        gifts = new ArrayList<>();
+        DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
+
+        gifts = db.getAllGifts();
+    }
+
+    private void deleteAllGiftsFromDb() {
+        DatabaseHelper db = DatabaseHelper.getInstance(getActivity());
+        db.deleteAllGiftRecords();
     }
 }

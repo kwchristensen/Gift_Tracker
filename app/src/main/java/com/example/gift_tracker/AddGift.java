@@ -31,14 +31,21 @@ public class AddGift extends AppCompatActivity {
                 if(txtGiftName.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Enter Name", Toast.LENGTH_LONG);
                     toast.show();
+                } else if(txtGiftDescription.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Enter Description", Toast.LENGTH_LONG);
+                    toast.show();
                 } else {
                     /*Toast toast = Toast.makeText(getApplicationContext(), "Nice work, your typing skills amaze me", Toast.LENGTH_LONG);
                     toast.show();*/
 
                     Gift newGift = new Gift(txtGiftName.getText().toString(), txtGiftDescription.getText().toString());
 
+                    db.addGift(newGift);
 
-                    
+                    Toast toast = Toast.makeText(getApplicationContext(), "Total Records: " + db.getGiftCount(), Toast.LENGTH_LONG);
+                    toast.show();
+
+                    finish();
                 }
             }
         });
